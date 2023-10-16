@@ -1,0 +1,130 @@
+body{
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(90deg, rgba(0,0,0,1) 20%, rgba(190,99,4,1) 100%);
+    color:white;
+    
+}
+p{
+    text-decoration: underline;
+    color:white;
+    text-align: left;
+
+}
+h1{
+    -webkit-text-stroke: 1px black;
+    font-family: Barlow;
+    color:rgba(190,99,4,1);
+
+}
+h2{
+    -webkit-text-stroke: 1px black;
+    font-family: "Barlow Condensed";
+    text-decoration: underline;
+    color:rgba(190,99,4,1);
+}
+h3{
+    font-family: "Arial Narrow";
+}
+header{
+    border: 2px solid black;
+    padding: 10px;
+}
+footer{
+    border-top: 2px solid black;
+    padding: 10px;
+}
+.merkury{
+    width:120px;
+}
+.wenus{
+    width:100px;
+    
+}
+.ziemia{
+    width: 140px;
+}
+.mars{
+    width:130px;
+}
+.jowisz{
+    width:240px;
+}
+.saturn{
+    width:200px;
+}
+.uran{
+    width:180px;
+}
+.neptun{
+    width:180px;
+}
+img{
+    transition: 3s;
+}
+
+img:hover{
+    transform: scale(1.1) translateX(+50px) rotate(90deg);
+    cursor: pointer;
+}
+@media(min-width:600px){
+    h1{
+        -webkit-text-stroke: 1px black;
+        font-family: Barlow;
+        color:rgba(190,99,4,1);
+
+    }
+    h2{
+        -webkit-text-stroke: 1px black;
+        font-family: "Barlow Condensed";
+        text-decoration: underline;
+        color:rgba(190,99,4,1);
+    }
+    h3{
+        font-family: "Arial Narrow";
+    }
+    p{
+
+        text-align: justify;
+    }
+    header{
+        border: 2px solid black;
+        padding: 10px;
+    }
+    footer{
+        border-top: 2px solid black;
+        padding: 10px;
+    }
+    img:hover{
+        transform: scale(1.4) translateX(+200px) rotate(270deg);
+        cursor: pointer;
+
+    }
+    .merkury{
+        width:200px;
+    }
+    .wenus{
+        width:200px;
+
+    }
+    .ziemia{
+        width: 200px;
+    }
+    .mars{
+        width:150px;
+    }
+    .jowisz{
+        width:500px;
+    }
+    .saturn{
+        width:400px;
+    }
+    .uran{
+        width:400px;
+    }
+    .neptun{
+        width:300px;
+    }
+}
+
+
