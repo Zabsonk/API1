@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Maps Puzzle</title>
+    <link rel="stylesheet" href="leaflet-1.7.1/leaflet.css" />
+    <script src="leaflet-1.7.1/leaflet-src.js"></script>
+    <script src="leaflet-1.7.1/leaflet-providers.js"></script>
+    <script src="leaflet-1.7.1/leaflet-image.js"></script>
+
+    <style>
+        #map {
+            width: 600px;
+            height: 300px;
+            border: 1px solid black;
+        }
+
+        .puzzle-piece {
+            width: 150px;
+            height: 75px;
+            float: left;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        #puzzleSolutionContainer {
+            position: relative;
+            border: 2px dashed black;
+            width: 600px;
+            height: 300px;
+            margin-top: 20px;
+        }
+
+        .solution-area {
+            position: absolute;
+            border: 1px solid black;
+            width: 150px;
+            height: 75px;
+        }
+    </style>
+</head>
+<body>
+<div id="map"></div>
+<div id="puzzleSolutionContainer" ondrop="drop(event)" ondragover="allowDrop(event)">
+    <div class="solution-area" id="solutionArea_0_0" style="top: 0; left: 0;"></div>
+    <div class="solution-area" id="solutionArea_0_1" style="top: 0; left: 150px;"></div>
+    <div class="solution-area" id="solutionArea_0_2" style="top: 0; left: 300px;"></div>
+    <div class="solution-area" id="solutionArea_0_3" style="top: 0; left: 450px;"></div>
+    <div class="solution-area" id="solutionArea_1_0" style="top: 75px; left: 0;"></div>
+    <div class="solution-area" id="solutionArea_1_1" style="top: 75px; left: 150px;"></div>
+    <div class="solution-area" id="solutionArea_1_2" style="top: 75px; left: 300px;"></div>
+    <div class="solution-area" id="solutionArea_1_3" style="top: 75px; left: 450px;"></div>
+    <div class="solution-area" id="solutionArea_2_0" style="top: 150px; left: 0;"></div>
+    <div class="solution-area" id="solutionArea_2_1" style="top: 150px; left: 150px;"></div>
+    <div class="solution-area" id="solutionArea_2_2" style="top: 150px; left: 300px;"></div>
+    <div class="solution-area" id="solutionArea_2_3" style="top: 150px; left: 450px;"></div>
+    <div class="solution-area" id="solutionArea_3_0" style="top: 225px; left: 0;"></div>
+    <div class="solution-area" id="solutionArea_3_1" style="top: 225px; left: 150px;"></div>
+    <div class="solution-area" id="solutionArea_3_2" style="top: 225px; left: 300px;"></div>
+    <div class="solution-area" id="solutionArea_3_3" style="top: 225px; left: 450px;"></div>
+</div>
+
+<button id="getLocation">Get Current Location</button>
+<button id="saveButton">Save Raster Map</button>
+<br>
+
+<div id="puzzleContainer"></div>
+
+
+<script>
+    let map = L.map('map').setView([53.430127, 14.564802], 18);
+    L.tileLayer.provider('Esri.WorldImagery').addTo(map);
+    let marker = L.marker([53.430127, 14.564802]).addTo(map);
+    marker.bindPopup("<strong>Hello!</strong><br>This is a popup.");
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
+    document.getElementById("saveButton").addEventListener("click", function() {
+        leafletImage(map, function (err, canvas) {
+
+            let puzzleContainer = document.getElementById("puzzleContainer");
+            puzzleContainer.innerHTML = "";
+
+            let pieceWidth = canvas.width / 4;
+            let pieceHeight = canvas.height / 4;
+
+            let puzzleIndices = [];
+            for (let i = 0; i < 4; i++) {
+                for (let j = 0; j < 4; j++) {
+                    puzzleIndices.push({ row: i, col: j });
+                }
+            }
+
+            shuffleArray(puzzleIndices);
+            for (let k = 0; k < puzzleIndices.length; k++) {
+                let i = puzzleIndices[k].row;
+                let j = puzzleIndices[k].col;
+
+
+                let pieceCanvas = document.createElement("canvas");
+                pieceCanvas.width = pieceWidth;
+                pieceCanvas.height = pieceHeight;
+
+
+                let pieceContext = pieceCanvas.getContext("2d");
+
+
+                pieceContext.drawImage(canvas, j * pieceWidth, i * pieceHeight, pieceWidth, pieceHeight, 0, 0, pieceWidth, pieceHeight);
+
+                pieceContext.strokeStyle = 'black';
+                pieceContext.lineWidth = 2;
+                pieceContext.strokeRect(0, 0, pieceWidth, pieceHeight);
+
+                let puzzlePiece = document.createElement("img");
+                puzzlePiece.src = pieceCanvas.toDataURL();
+                puzzlePiece.classList.add("puzzle-piece");
+                puzzlePiece.draggable = true;
+
+
+                puzzlePiece.id = `puzzlePiece_${i}_${j}`;
+
+                puzzlePiece.dataset.solutionArea = `solutionArea_${i}_${j}`;
+
+
+                puzzlePiece.addEventListener("dragstart", function (event) {
+                    event.dataTransfer.setData("text", event.target.id);
+                });
+
+
+                puzzleContainer.appendChild(puzzlePiece);
+            }
+        });
+    });
+
+
+    document.getElementById("getLocation").addEventListener("click", function(event) {
+        if (!navigator.geolocation) {
+            console.log("No geolocation.");
+        }
+
+
+        navigator.geolocation.getCurrentPosition(position => {
+            console.log(position);
+            let lat = position.coords.latitude;
+            let lon = position.coords.longitude;
+
+
+            map.setView([lat, lon]);
+        }, positionError => {
+            console.error(positionError);
+        });
+    });
+
+    function allowDrop(event) {
+        event.preventDefault();
+    }
+
+
+
+    function drop(event) {
+        event.preventDefault();
+        var data = event.dataTransfer.getData("text");
+        var puzzlePiece = document.getElementById(data);
+
+        var puzzleIdParts = puzzlePiece.id.split('_');
+        var solutionAreaId = `solutionArea_${puzzleIdParts[1]}_${puzzleIdParts[2]}`;
+
+        if (event.target.id === solutionAreaId) {
+            console.log("pasuje")
+            var clone = puzzlePiece.cloneNode(true);
+            clone.id = "";
+
+            var offsetX = -4;
+            var offsetY = -4;
+            clone.style.position = 'absolute';
+            clone.style.left = (event.target.offsetLeft + offsetX) + 'px';
+            clone.style.top = (event.target.offsetTop + offsetY) + 'px';
+
+            document.getElementById("puzzleSolutionContainer").appendChild(clone);
+
+            puzzlePiece.parentNode.removeChild(puzzlePiece);
+        }else {
+            console.log('nie pasuje')
+        }
+
+    }
+
+
+</script>
+</body>
+</html>
