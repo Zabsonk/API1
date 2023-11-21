@@ -1,0 +1,112 @@
+body{
+    background-image: url("/assets/imgaes/tło.jpg");
+    color:white;
+    
+}
+#styleLinks{
+    font-size: 30px;
+}
+p{
+    color:white;
+    text-align: left;
+}
+h1{
+
+    font-family: "Yu Gothic UI";
+}
+h2{
+   font-family: "Gentium Basic";
+}
+h3{
+    font-family: Sylfaen;
+}
+ul{
+    list-style-type:decimal;
+    
+}
+
+.merkury{
+    width:20%;
+}
+.wenus{
+    width:20%;
+    
+}
+.ziemia{
+    width: 30%;
+}
+.mars{
+    width:20%;
+}
+.jowisz{
+    width:50%;
+}
+.saturn{
+    width:45%;
+}
+.uran{
+    width:40%;
+}
+.neptun{
+    width:35%;
+}
+img{
+    transition: 3s;
+}
+img:hover{
+    transform: scale(1.4) translateX(+200px);
+    cursor: pointer;
+
+}@media(min-width:600px){
+    #styleLinks{
+        font-size: 30px;
+    }
+    h1{
+        font-family: "Yu Gothic UI";
+
+    }
+    h1{
+
+        font-family: "Yu Gothic UI";
+    }
+    h2{
+        font-family: "Gentium Basic";
+    }
+    h3{
+        font-family: Sylfaen;
+    }
+    p{
+
+        text-align: justify;
+    }
+    img:hover{
+        transform: scale(1.4) translateX(+200px) rotate(270deg);
+        cursor: pointer;
+
+    }
+    .merkury{
+        width:200px;
+    }
+    .wenus{
+        width:200px;
+
+    }
+    .ziemia{
+        width: 200px;
+    }
+    .mars{
+        width:150px;
+    }
+    .jowisz{
+        width:500px;
+    }
+    .saturn{
+        width:400px;
+    }
+    .uran{
+        width:400px;
+    }
+    .neptun{
+        width:300px;
+    }
+}
