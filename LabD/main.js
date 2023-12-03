@@ -12,7 +12,7 @@ const WeatherApp=class{
         let req=new XMLHttpRequest();
         req.open("GET", url,true);
         req.addEventListener("load",()=>{
-           this.currentWeather=JSON.parse(req.responseText);
+           console.log(JSON.parse(req.responseText));
            this.drawWeather();
            
         });
