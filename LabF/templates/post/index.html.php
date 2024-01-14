@@ -7,9 +7,9 @@ $title = 'Post List';
 $bodyClass = 'index';
 
 ob_start(); ?>
-    <h1>MERCEDES BMW AUDI</h1>
+    <h1>Posts List</h1>
 
-    <a href="<?= $router->generatePath('post-create') ?>">Create new Car</a>
+    <a href="<?= $router->generatePath('post-create') ?>">Create new</a>
 
     <ul class="index-list">
         <?php foreach ($posts as $post): ?>

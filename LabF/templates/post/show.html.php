@@ -8,10 +8,6 @@ $bodyClass = 'show';
 
 ob_start(); ?>
     <h1><?= $post->getSubject() ?></h1>
-    <p><?=$post->getModel()?></p>
-    <p><?=$post->getYear()?></p>
-    <p><?=$post->getColor()?></p>
-    <p><?=$post->getEngine()?></p>
     <article>
         <?= $post->getContent();?>
     </article>

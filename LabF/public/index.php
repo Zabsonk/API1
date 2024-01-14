@@ -38,6 +38,36 @@ switch ($action) {
         $controller = new \App\Controller\PostController();
         $view = $controller->deleteAction($_REQUEST['id'], $router);
         break;
+    case 'auto-index':
+
+        $controller = new \App\Controller\AutoController();
+        $view = $controller->indexAction($templating, $router);
+        break;
+    case 'auto-create':
+        $controller = new \App\Controller\AutoController();
+        $view = $controller->createAction($_REQUEST['auto'] ?? null, $templating, $router);
+        break;
+    case 'auto-edit':
+        if (! $_REQUEST['id']) {
+            break;
+        }
+        $controller = new \App\Controller\AutoController();
+        $view = $controller->editAction($_REQUEST['id'], $_REQUEST['auto'] ?? null, $templating, $router);
+        break;
+    case 'auto-show':
+        if (! $_REQUEST['id']) {
+            break;
+        }
+        $controller = new \App\Controller\AutoController();
+        $view = $controller->showAction($_REQUEST['id'], $templating, $router);
+        break;
+    case 'auto-delete':
+        if (! $_REQUEST['id']) {
+            break;
+        }
+        $controller = new \App\Controller\AutoController();
+        $view = $controller->deleteAction($_REQUEST['id'], $router);
+        break;
     case 'info':
         $controller = new \App\Controller\InfoController();
         $view = $controller->infoAction();
