@@ -1,0 +1,18 @@
+{
+  "background_color": "#FFF",
+  "display": "standalone",
+  "orientation": "any",
+  "start_url": "weather.html",
+  "name": "HelloCordova",
+  "short_name": "HelloCordova",
+  "version": "io.cordova.hellocordova",
+  "description": "Sample Apache Cordova App",
+  "author": "Kacper Żabiński",
+  "icons": [
+    {
+      "src": "res/electron/logozk51162.png",
+      "type": "image/png",
+      "sizes": "undefinedxundefined"
+    }
+  ]
+}

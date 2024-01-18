@@ -1,0 +1,35 @@
+body{
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to right,purple,black);
+}
+#weather-serach-params,#weather-result-container{
+    color:white;
+    text-align: center;
+    margin: 15px auto;
+}
+.weather-block{
+    display: block;
+    position: relative;
+    width: 350px;
+    height: 200px;
+    margin:15px auto;
+    border: 2px solid black;
+    border-radius:20px ;
+    height: 200px;
+    margin:15px auto;
+    border: 2px solid black;
+    border-radius:20px ;
+
+}
+.weather-temperature{
+    font-size: 30px;
+}
+button{
+    border-radius: 20px;
+}
+#locationInput{
+    border-radius: 20px;
+    color:white;
+    background:linear-gradient(to left,purple,black)
+}
